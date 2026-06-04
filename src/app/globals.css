@@ -103,6 +103,71 @@ body {
     0 24px 60px -28px color-mix(in srgb, var(--color-gold) 55%, transparent);
 }
 
+/* About 가치 카드 — 호버 시 3D 메탈릭 */
+.value-card {
+  transform: perspective(1000px) rotateX(0deg) translateY(0);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+.value-card:hover {
+  transform: perspective(1000px) rotateX(8deg) translateY(-10px);
+  border-color: color-mix(in srgb, var(--color-gold) 75%, transparent);
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.85),
+    0 0 46px -12px color-mix(in srgb, var(--color-gold) 60%, transparent);
+}
+.value-card .vc-metal {
+  background: linear-gradient(
+    135deg,
+    #f3ead0 0%,
+    #d8b863 26%,
+    #fff8e6 50%,
+    #9c7a2f 74%,
+    #ecd9a6 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.value-card .vc-glare {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.6) 48%,
+    rgba(255, 255, 255, 0.12) 56%,
+    transparent 66%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.value-card:hover .vc-metal,
+.value-card:hover .vc-glare {
+  opacity: 1;
+}
+.value-card:hover .vc-title {
+  color: var(--color-ink);
+}
+.value-card:hover .vc-desc {
+  color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+}
+.value-card .vc-icon {
+  transition: all 0.5s ease;
+}
+.value-card:hover .vc-icon {
+  background: var(--color-ink);
+  color: var(--color-gold-bright);
+  border-color: rgba(0, 0, 0, 0.45);
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .value-card,
+  .value-card:hover {
+    transform: none;
+  }
+}
+
 /* 마퀴(흐르는 리본) 애니메이션 */
 @keyframes marquee {
   from { transform: translateX(0); }
