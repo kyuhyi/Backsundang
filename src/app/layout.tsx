@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Nanum_Myeongjo, Noto_Sans_KR, Gowun_Batang } from "next/font/google";
+import {
+  Nanum_Myeongjo,
+  Noto_Sans_KR,
+  Gowun_Batang,
+  Song_Myung,
+} from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+
+// 브랜드 워드마크용 — 전통 붓끝 감성의 명조 (한국풍 포인트)
+const songmyung = Song_Myung({
+  variable: "--font-songmyung",
+  weight: ["400"],
+  display: "swap",
+});
 
 // 제목용 — 전통 명조 감성
 const myeongjo = Nanum_Myeongjo({
@@ -49,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${myeongjo.variable} ${noto.variable} ${batang.variable} h-full antialiased`}
+      className={`${songmyung.variable} ${myeongjo.variable} ${noto.variable} ${batang.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-cream">
         <Navbar />

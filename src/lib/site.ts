@@ -14,6 +14,7 @@ export const site = {
 
 export const navLinks = [
   { href: "#about", label: "소개" },
+  { href: "#weekly", label: "주간메뉴" },
   { href: "#menu", label: "메뉴" },
   { href: "#gallery", label: "갤러리" },
   { href: "#vr", label: "VR 투어" },

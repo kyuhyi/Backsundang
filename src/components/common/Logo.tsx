@@ -20,11 +20,11 @@ export function Logo({
       {/* 실제 로고 교체 지점 — 예시:
       <Image src="/images/logo.svg" alt="백선당" width={120} height={48} priority />
       */}
-      <span className="font-display text-2xl font-extrabold tracking-[0.12em] text-gold-gradient">
+      <span className="font-[family-name:var(--font-brand)] text-2xl tracking-[0.18em] text-gold-gradient">
         백선당
       </span>
       {showSub && (
-        <span className="mt-0.5 font-display text-[0.6rem] tracking-[0.5em] text-taupe">
+        <span className="mt-1 font-[family-name:var(--font-brand)] text-[0.6rem] tracking-[0.55em] text-taupe">
           白 善 堂
         </span>
       )}

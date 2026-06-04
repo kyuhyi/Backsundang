@@ -17,6 +17,7 @@
   --color-taupe: #b8ae9c;
   --color-taupe-dim: #8a8170;
 
+  --font-brand: var(--font-songmyung);
   --font-display: var(--font-myeongjo);
   --font-sans: var(--font-noto);
   --font-serif: var(--font-batang);
@@ -33,6 +34,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-ink);
+  overflow-x: hidden; /* 모바일 가로 스크롤 방지 */
 }
 
 body {
@@ -41,6 +43,8 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  word-break: keep-all; /* 한국어 단어 단위 줄바꿈 */
+  overflow-wrap: break-word;
   /* 미세 골드 비네팅 질감 */
   background-image:
     radial-gradient(

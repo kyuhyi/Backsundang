@@ -38,11 +38,13 @@ src/
   features/
     hero/                 # 히어로 (패럴랙스)
     about/                # 소개 + 핵심 가치
-    menu/                 # 메뉴 (탭, 가격)        ← menu.data.ts
-    gallery/              # 갤러리 (라이트박스)     ← gallery.data.ts
-    vr/                   # 360 / VR 투어 임베드    ← vr.data.ts
-    location/             # 오시는 길 + 영업시간     ← location.data.ts
-  lib/                    # site.ts(공통 정보), utils.ts
+    weekly/               # 주간 메뉴(월~금)        ← 구글시트 연동 / weekly.data.ts(폴백)
+    menu/                 # 메뉴 (탭, 가격)         ← 구글시트 연동 / menu.data.ts(폴백)
+    gallery/              # 갤러리 (라이트박스)      ← gallery.data.ts
+    vr/                   # 360 / VR 투어 임베드     ← vr.data.ts
+    location/             # 오시는 길 + 영업시간      ← location.data.ts
+  lib/                    # site.ts(공통 정보), sheets.ts(구글시트 연동), utils.ts
+apps-script/              # 구글시트 Apps Script 코드 + 연동 가이드
 public/images/            # 플레이스홀더 이미지 (실제 사진으로 교체)
 ```
 
@@ -53,11 +55,23 @@ public/images/            # 플레이스홀더 이미지 (실제 사진으로 �
 | 바꿀 내용 | 파일 |
 |---|---|
 | 상호 · 전화번호 · 주소 · 태그라인 | `src/lib/site.ts` |
-| 메뉴 · 가격 | `src/features/menu/menu.data.ts` |
+| **주간 메뉴(월~금) · 메뉴/가격** | **구글시트** (관리자 직접 수정 · 아래 참고) / 폴백: `weekly.data.ts`·`menu.data.ts` |
 | 소개 문구 · 핵심 가치 | `src/features/about/about.data.ts` |
 | 갤러리 사진 | `public/images/` 교체 + `src/features/gallery/gallery.data.ts` |
 | 영업시간 · 사업자정보 · 지도 | `src/features/location/location.data.ts` |
 | **VR / 360 투어 영상** | `src/features/vr/vr.data.ts` |
+
+## 구글시트로 메뉴 관리 (관리자용)
+
+관리자가 **코드를 만지지 않고 구글시트만 수정**하면 주간 메뉴·메뉴판이 자동 반영됩니다.
+이미지도 시트에 링크만 넣으면 됩니다. 설정 방법은 **[`apps-script/README.md`](./apps-script/README.md)** 참고.
+
+1. 구글시트에 `주간메뉴` / `메뉴판` 탭을 만든다 (양식은 가이드 참고)
+2. `apps-script/Code.gs` 를 Apps Script 웹앱으로 배포한다
+3. Vercel 환경변수 `SHEETS_API_URL` 에 웹앱 URL을 넣는다
+
+이후 시트를 수정하면 재배포 없이 **최대 5분 내(ISR 재검증)** 사이트에 반영됩니다.
+환경변수 미설정 시에는 샘플 데이터로 안전하게 표시됩니다.
 
 ### VR 투어 영상 넣기
 

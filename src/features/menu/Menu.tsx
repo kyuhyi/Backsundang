@@ -5,8 +5,8 @@ import { Star } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { staggerItem } from "@/components/common/Reveal";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { menuCategories } from "./menu.data";
-import type { MenuItem } from "./types";
+import { menuCategories as fallbackCategories } from "./menu.data";
+import type { MenuCategory, MenuItem } from "./types";
 
 function formatPrice(price: number) {
   if (price === 0) return "무료";
@@ -44,7 +44,11 @@ function MenuRow({ item }: { item: MenuItem }) {
   );
 }
 
-export function Menu() {
+export function Menu({ categories }: { categories?: MenuCategory[] }) {
+  // 구글시트 데이터가 있으면 사용, 없으면 샘플 폴백
+  const menuCategories =
+    categories && categories.length ? categories : fallbackCategories;
+
   return (
     <section
       id="menu"
