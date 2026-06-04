@@ -15,15 +15,24 @@ export interface SiteData {
 }
 
 /**
+ * 백선당 메뉴 관리 구글시트(Apps Script 웹앱) 기본 URL.
+ * 공개 읽기 전용 엔드포인트라 코드에 포함해도 안전하다.
+ * 운영 중 URL을 바꾸려면 Vercel 환경변수 `SHEETS_API_URL` 로 덮어쓰면 된다.
+ */
+const DEFAULT_SHEETS_API_URL =
+  "https://script.google.com/macros/s/AKfycbxibbCKpo7eJXbTLszjV8uNSG8aVbTVIR-V5CNjlTkrgj_FPUFUf7H47CTEMvnDEUyHvA/exec";
+
+/**
  * 구글시트(Apps Script 웹앱)에서 주간 메뉴와 메뉴판을 가져온다.
  *
- * - 환경변수 `SHEETS_API_URL` 에 Apps Script 웹앱 URL을 설정하면 활성화된다.
+ * - 기본적으로 위 DEFAULT_SHEETS_API_URL 에서 가져오며,
+ *   환경변수 `SHEETS_API_URL` 가 있으면 그 값이 우선한다.
  * - 5분(revalidate) 간격으로 재검증하므로, 관리자가 시트를 수정하면
  *   재배포 없이 최대 5분 내에 사이트에 반영된다 (Vercel ISR).
  * - URL 미설정 또는 오류 시 샘플 데이터로 안전하게 폴백한다.
  */
 export async function getSiteData(): Promise<SiteData> {
-  const url = process.env.SHEETS_API_URL;
+  const url = process.env.SHEETS_API_URL || DEFAULT_SHEETS_API_URL;
   const fallback: SiteData = {
     weekly: sampleWeeklyMenu,
     menu: sampleMenu,
