@@ -27,8 +27,8 @@ const DEFAULT_SHEETS_API_URL =
  *
  * - 기본적으로 위 DEFAULT_SHEETS_API_URL 에서 가져오며,
  *   환경변수 `SHEETS_API_URL` 가 있으면 그 값이 우선한다.
- * - 5분(revalidate) 간격으로 재검증하므로, 관리자가 시트를 수정하면
- *   재배포 없이 최대 5분 내에 사이트에 반영된다 (Vercel ISR).
+ * - 60초(revalidate) 간격으로 재검증하므로, 관리자가 시트를 수정하면
+ *   재배포 없이 약 1분 내에 사이트에 반영된다 (Vercel ISR).
  * - URL 미설정 또는 오류 시 샘플 데이터로 안전하게 폴백한다.
  */
 export async function getSiteData(): Promise<SiteData> {
@@ -42,7 +42,7 @@ export async function getSiteData(): Promise<SiteData> {
   if (!url) return fallback;
 
   try {
-    const res = await fetch(url, { next: { revalidate: 300 } });
+    const res = await fetch(url, { next: { revalidate: 60 } });
     if (!res.ok) return fallback;
     const raw = (await res.json()) as unknown;
 

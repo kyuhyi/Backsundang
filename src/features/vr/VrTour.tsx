@@ -9,10 +9,11 @@ import { Reveal } from "@/components/common/Reveal";
 import { vrTour } from "./vr.data";
 
 export function VrTour() {
-  const [playing, setPlaying] = useState(false);
   const hasEmbed = vrTour.embedUrl.length > 0;
   const hasVideo = vrTour.videoUrl.length > 0;
   const hasMedia = hasEmbed || hasVideo;
+  // 미디어가 있으면 클릭 없이 자동 재생(자동 로드)
+  const [playing, setPlaying] = useState(hasMedia);
 
   return (
     <section id="vr" className="scroll-mt-20 bg-ink-soft py-24 sm:py-32">
@@ -32,6 +33,7 @@ export function VrTour() {
                 title={vrTour.title}
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; xr-spatial-tracking"
                 allowFullScreen
+                loading="lazy"
                 className="h-full w-full"
               />
             ) : hasVideo && playing ? (

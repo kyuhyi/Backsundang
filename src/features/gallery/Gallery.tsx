@@ -17,7 +17,7 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Gallery"
           title="백선당의 순간들"
-          description="정성껏 차린 음식과 따뜻한 공간을 곧 사진으로 만나보세요."
+          description="정성껏 차린 음식과 따뜻한 공간을 사진으로 만나보세요."
         />
 
         <motion.div
