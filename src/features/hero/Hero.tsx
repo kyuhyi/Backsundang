@@ -26,32 +26,35 @@ export function Hero() {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
+      className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
       {/* 배경: 어두운 그라데이션 + 골드 글로우 (실제 매장 사진으로 교체 가능) */}
       <motion.div
         style={{ y: bgY }}
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 z-0"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#1c1813_0%,#0e0d0b_55%,#080706_100%)]" />
-        {/* 매장 상차림 일러스트 배경 (은은하게) */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#241a0f_0%,#140f0a_55%,#080706_100%)]" />
+        {/* 매장 상차림 일러스트 배경 */}
         <Image
           src="/images/hero-bg.svg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-35 mix-blend-luminosity"
+          className="object-cover object-bottom opacity-90"
         />
-        <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]" />
+        {/* 따뜻한 상단 조명 글로우 */}
+        <div className="absolute left-1/2 top-[10%] h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-gold/20 blur-[130px]" />
         {/* 은은한 격자 텍스처 */}
-        <div className="texture-grid absolute inset-0 opacity-[0.5]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/60" />
+        <div className="texture-grid absolute inset-0 opacity-[0.25]" />
+        {/* 상단~중앙은 짙게(글자 가독), 하단 상차림은 또렷이 노출 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink from-[28%] via-ink/55 via-[62%] to-ink/0" />
+        <div className="absolute inset-0 bg-[radial-gradient(85%_50%_at_50%_42%,rgba(10,9,8,0.6)_0%,transparent_65%)]" />
       </motion.div>
 
       {/* 떠다니는 골드 입자 */}
-      <div className="pointer-events-none absolute inset-0 -z-[5]" aria-hidden="true">
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         {[
           { l: "12%", t: "26%", s: 5, d: 0 },
           { l: "82%", t: "32%", s: 4, d: 1.2 },
@@ -77,7 +80,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: fade }}
-        className="container-x flex flex-col items-center text-center"
+        className="container-x relative z-10 flex flex-col items-center text-center"
       >
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -151,7 +154,7 @@ export function Hero() {
         href="#about"
         aria-label="아래로 스크롤"
         style={{ opacity: fade }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gold/70"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-gold/70"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
