@@ -17,8 +17,12 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Gallery"
           title="백선당의 순간들"
-          description="정성껏 차린 음식과 따뜻한 공간을 사진으로 만나보세요."
+          description="정성껏 차린 음식과 따뜻한 공간을 곧 사진으로 만나보세요."
         />
+
+        <p className="mt-4 text-center text-xs leading-relaxed text-taupe-dim">
+          ※ 아래 이미지는 참고를 돕는 예시 이미지이며 실제와 다를 수 있습니다.
+        </p>
 
         <motion.div
           initial="hidden"
