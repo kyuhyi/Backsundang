@@ -7,9 +7,9 @@ export const site = {
   name: "백선당",
   nameHanja: "白善堂",
   tagline: "병점역, 정성으로 차린 백반 한 상",
-  phone: "031-000-0000", // TODO: 실제 번호로 교체
-  phoneHref: "tel:031-000-0000",
-  address: "경기도 화성시 병점동 OO-OO (병점역 도보 5분)", // TODO: 실제 주소
+  phone: "010-4824-0505",
+  phoneHref: "tel:010-4824-0505",
+  address: "경기도 화성시 병점구 병점노을4로 19 골든스퀘어 1차 2층 203호",
 } as const;
 
 export const navLinks = [

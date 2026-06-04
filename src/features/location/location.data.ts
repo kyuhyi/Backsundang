@@ -23,7 +23,9 @@ export const businessInfo = {
  *   값이 비어 있으면 약도 플레이스홀더가 표시된다.
  *   (예: 구글맵 "지도 공유 또는 삽입 > HTML 삽입"의 src 값)
  */
-export const mapEmbedUrl = "";
+export const mapEmbedUrl =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3177.77585906111!2d127.03115000000001!3d37.2055529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b43004b2a92f3%3A0xfca7fda991c1a7ad!2z6rOo65Og7Iqk7YCY7Ja0MQ!5e0!3m2!1sko!2skr!4v1780613019079!5m2!1sko!2skr";
 
-/** 외부 지도 앱으로 연결되는 길찾기 링크 (네이버 지도 검색) */
-export const directionsUrl = "https://map.naver.com/v5/search/병점역%20백선당";
+/** 외부 지도 앱으로 연결되는 길찾기 링크 (구글 지도 검색) */
+export const directionsUrl =
+  "https://www.google.com/maps/search/?api=1&query=병점+골든스퀘어+1차+백선당";

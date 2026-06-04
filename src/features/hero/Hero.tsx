@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronDown, Phone, MapPin } from "lucide-react";
-import { Logo } from "@/components/common/Logo";
-import { SectionDivider } from "@/components/common/SectionDivider";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
 
@@ -72,29 +71,19 @@ export function Hero() {
         className="container-x relative z-10 flex flex-col items-center text-center"
       >
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease }}
-        >
-          <p className="mb-6 text-xs font-medium uppercase tracking-[0.4em] text-gold/80">
-            Traditional Korean Dining · Since 2024
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.92, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease, delay: 0.1 }}
         >
-          <Logo className="scale-[1.3] sm:scale-[2]" />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-        >
-          <SectionDivider className="mt-12" />
+          {/* 브랜드 로고 (투명 배경) */}
+          <Image
+            src="/images/logo.png"
+            alt="백선당 白善堂"
+            width={300}
+            height={300}
+            priority
+            className="h-auto w-44 drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)] sm:w-60 md:w-72"
+          />
         </motion.div>
 
         <motion.h1
