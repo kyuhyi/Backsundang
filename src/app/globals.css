@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ──────────────────────────────────────────────
+   백선당 — 블랙 골드 전통 한식 디자인 토큰
+   (무드보드 팔레트 기반, 다크 테마 고정)
+   ────────────────────────────────────────────── */
+@theme {
+  --color-ink: #0e0d0b;
+  --color-ink-soft: #15130f;
+  --color-charcoal: #211f1b;
+  --color-charcoal-soft: #2a2926;
+  --color-gold: #c9a24b;
+  --color-gold-bright: #e3c270;
+  --color-gold-deep: #9c7a2f;
+  --color-cream: #f5efe2;
+  --color-taupe: #b8ae9c;
+  --color-taupe-dim: #8a8170;
+
+  --font-display: var(--font-myeongjo);
+  --font-sans: var(--font-noto);
+  --font-serif: var(--font-batang);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: color-mix(in srgb, var(--color-gold) 18%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-ink);
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* 미세 골드 비네팅 질감 */
+  background-image:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      color-mix(in srgb, var(--color-gold) 8%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      100% 60% at 50% 110%,
+      color-mix(in srgb, var(--color-gold-deep) 7%, transparent),
+      transparent 55%
+    );
+  background-attachment: fixed;
+}
+
+/* 골드 텍스트 그라데이션 유틸 */
+.text-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-bright) 0%,
+    var(--color-gold) 45%,
+    var(--color-gold-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 섹션 가로 패딩/최대폭 공통 */
+.container-x {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* 얇은 골드 스크롤바 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-gold) 40%, transparent);
+  border-radius: 9999px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 35%, transparent);
+  color: var(--color-cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
