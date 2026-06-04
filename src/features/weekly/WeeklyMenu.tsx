@@ -38,6 +38,11 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
   return (
     <section id="weekly" className="relative scroll-mt-20 py-24 sm:py-32">
       <SectionGlow position="left" texture="grid" />
+      {/* 빛이 도는 반짝이는 테두리 */}
+      <div
+        aria-hidden="true"
+        className="shine-frame pointer-events-none absolute inset-3 z-0 sm:inset-6"
+      />
       <div className="container-x">
         <SectionHeading
           eyebrow="Weekly Special · 주간 백반"

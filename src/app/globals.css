@@ -168,6 +168,63 @@ body {
   }
 }
 
+/* 빛이 테두리를 따라 도는 반짝이는 프레임 (Weekly 섹션 강조) */
+@property --bsd-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.shine-frame {
+  border-radius: 2rem;
+  box-shadow: 0 0 70px -28px color-mix(in srgb, var(--color-gold) 55%, transparent);
+}
+/* 회전하는 골드 광선(테두리만 보이도록 마스크) */
+.shine-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--bsd-angle),
+    transparent 0deg,
+    color-mix(in srgb, var(--color-gold) 12%, transparent) 38deg,
+    var(--color-gold) 66deg,
+    var(--color-gold-bright) 90deg,
+    var(--color-gold) 114deg,
+    transparent 150deg,
+    transparent 210deg,
+    var(--color-gold) 246deg,
+    var(--color-gold-bright) 270deg,
+    var(--color-gold) 294deg,
+    transparent 330deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: bsd-rotate 7s linear infinite;
+}
+/* 항상 보이는 은은한 기본 테두리 */
+.shine-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 16%, transparent);
+}
+@keyframes bsd-rotate {
+  to {
+    --bsd-angle: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shine-frame::before {
+    animation: none;
+  }
+}
+
 /* 마퀴(흐르는 리본) 애니메이션 */
 @keyframes marquee {
   from { transform: translateX(0); }
