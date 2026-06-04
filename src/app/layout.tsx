@@ -41,15 +41,51 @@ const batang = Gowun_Batang({
 });
 
 export const metadata: Metadata = {
-  title: "백선당 白善堂 · 병점역 백반 정식",
+  metadataBase: new URL("https://baeksundang.vercel.app"),
+  title: {
+    default: "병점역 백선당 한식뷔페 · 정성을 담아 지은 밥",
+    template: "%s | 병점역 백선당 한식뷔페",
+  },
   description:
-    "병점역에 새로 문을 연 백반 전문 식당 백선당. 정성으로 차린 한 상, 전통과 모던이 어우러진 한식을 즐기세요.",
-  keywords: ["백선당", "병점역 맛집", "병점 백반", "백반 정식", "한정식", "병점역 식당"],
+    "병점역 도보 3분, 백선당 한식뷔페. 매일 새로 짓는 정성스러운 밥과 정갈한 반찬, 매일 바뀌는 주간 백반을 합리적인 가격에 즐기세요.",
+  keywords: [
+    "백선당",
+    "병점역 백선당",
+    "병점역 한식뷔페",
+    "병점 한식뷔페",
+    "병점역 맛집",
+    "병점 백반",
+    "화성 한식뷔페",
+    "병점역 점심",
+    "한식뷔페",
+  ],
+  applicationName: "백선당",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "백선당 白善堂 · 병점역 백반 정식",
-    description: "병점역, 정성으로 차린 백반 한 상.",
     type: "website",
     locale: "ko_KR",
+    url: "https://baeksundang.vercel.app",
+    siteName: "백선당",
+    title: "병점역 백선당 한식뷔페",
+    description: "정성을 담아 지은 밥",
+    images: [
+      {
+        url: "/images/og.png",
+        width: 1200,
+        height: 630,
+        alt: "병점역 백선당 한식뷔페 — 마음과 정성을 담은 한식뷔페",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "병점역 백선당 한식뷔페",
+    description: "정성을 담아 지은 밥",
+    images: ["/images/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
