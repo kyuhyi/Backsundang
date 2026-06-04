@@ -34,10 +34,13 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-ink);
-  overflow-x: hidden; /* 모바일 가로 스크롤 방지 */
 }
 
 body {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip; /* 모바일 가로 흔들림(가로 오버플로) 차단 */
   background-color: var(--color-ink);
   color: var(--color-cream);
   font-family: var(--font-sans), system-ui, sans-serif;
@@ -71,6 +74,42 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* 한지/격자 질감 — 섹션 배경 장식 (너무 심심하지 않게) */
+.texture-hanji {
+  background-image:
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--color-gold) 5%, transparent) 1px,
+      transparent 1.5px
+    );
+  background-size: 22px 22px;
+}
+.texture-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+/* 골드 샤이머 호버 글로우 */
+.gold-glow:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-gold) 45%, transparent),
+    0 24px 60px -28px color-mix(in srgb, var(--color-gold) 55%, transparent);
+}
+
+/* 마퀴(흐르는 리본) 애니메이션 */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 26s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
 }
 
 /* 섹션 가로 패딩/최대폭 공통 */

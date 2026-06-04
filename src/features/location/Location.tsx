@@ -2,6 +2,7 @@
 
 import { MapPin, Phone, Clock, Car, Train, Navigation } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { SectionGlow } from "@/components/common/SectionGlow";
 import { Reveal } from "@/components/common/Reveal";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
@@ -14,7 +15,8 @@ import {
 
 export function Location() {
   return (
-    <section id="location" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="location" className="relative scroll-mt-20 py-24 sm:py-32">
+      <SectionGlow position="right" texture="hanji" />
       <div className="container-x">
         <SectionHeading
           eyebrow="Location"

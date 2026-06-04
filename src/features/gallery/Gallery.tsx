@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { SectionGlow } from "@/components/common/SectionGlow";
 import { staggerItem } from "@/components/common/Reveal";
 import {
   Dialog,
@@ -16,7 +17,8 @@ import { cn } from "@/lib/utils";
 
 export function Gallery() {
   return (
-    <section id="gallery" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="gallery" className="relative scroll-mt-20 py-24 sm:py-32">
+      <SectionGlow position="center" texture="hanji" />
       <div className="container-x">
         <SectionHeading
           eyebrow="Gallery"
@@ -37,7 +39,7 @@ export function Gallery() {
                 <motion.button
                   variants={staggerItem}
                   className={cn(
-                    "group relative overflow-hidden rounded-xl border border-gold/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
+                    "gold-glow group relative overflow-hidden rounded-xl border border-gold/15 transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
                     img.tall && "row-span-2"
                   )}
                   aria-label={`${img.alt} 크게 보기`}

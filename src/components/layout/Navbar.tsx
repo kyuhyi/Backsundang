@@ -31,13 +31,18 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-gold/20 bg-ink/85 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b border-gold/15 bg-ink/45 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.85)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-ink/35"
+          : "border-b border-transparent bg-gradient-to-b from-ink/70 to-transparent"
       )}
     >
-      <nav className="container-x flex h-18 items-center justify-between py-3">
+      <nav
+        className={cn(
+          "container-x flex items-center justify-between transition-all duration-500",
+          scrolled ? "h-16" : "h-20"
+        )}
+      >
         <a href="#top" aria-label="백선당 홈" className="shrink-0">
           <Logo showSub={false} className="scale-90" />
         </a>

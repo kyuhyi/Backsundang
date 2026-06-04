@@ -2,12 +2,14 @@
 
 import { motion } from "motion/react";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { SectionGlow } from "@/components/common/SectionGlow";
 import { Reveal, Stagger, staggerItem } from "@/components/common/Reveal";
 import { aboutStory, aboutValues } from "./about.data";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="about" className="relative scroll-mt-20 py-24 sm:py-32">
+      <SectionGlow position="right" texture="hanji" />
       <div className="container-x">
         <SectionHeading eyebrow={aboutStory.eyebrow} title={aboutStory.title} />
 

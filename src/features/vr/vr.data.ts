@@ -17,7 +17,7 @@
 export const vrTour = {
   embedUrl: "", // 예: "https://www.youtube.com/embed/XXXXXXXXXXX"
   videoUrl: "", // 예: "/videos/store-tour.mp4"
-  posterImage: "/images/gallery-5.svg",
+  posterImage: "/images/vr-interior.svg",
   title: "백선당 매장 VR 투어",
   description:
     "전통과 모던이 어우러진 백선당의 공간을 360°로 둘러보세요. 매장에서 직접 촬영한 투어 영상이 곧 공개됩니다.",

@@ -11,10 +11,10 @@ export interface GalleryImage {
  *   /public/images/ 에 사진을 넣고 아래 src/alt 를 바꾸면 된다.
  */
 export const galleryImages: GalleryImage[] = [
-  { src: "/images/gallery-1.svg", alt: "백선당 정식 한 상", tall: true },
-  { src: "/images/gallery-2.svg", alt: "직접 양념한 제육볶음" },
-  { src: "/images/gallery-3.svg", alt: "구수한 된장찌개" },
-  { src: "/images/gallery-4.svg", alt: "정갈하게 차려낸 반찬" },
-  { src: "/images/gallery-5.svg", alt: "백선당 매장 전경", tall: true },
-  { src: "/images/gallery-6.svg", alt: "갓 지은 가마솥밥" },
+  { src: "/images/dish-baekban.svg", alt: "백선당 정식 한 상", tall: true },
+  { src: "/images/dish-jeyuk.svg", alt: "직접 양념한 제육볶음" },
+  { src: "/images/dish-doenjang.svg", alt: "구수한 된장찌개" },
+  { src: "/images/dish-banchan.svg", alt: "정갈하게 차려낸 반찬" },
+  { src: "/images/interior.svg", alt: "백선당 매장 전경", tall: true },
+  { src: "/images/dish-rice.svg", alt: "갓 지은 가마솥밥" },
 ];

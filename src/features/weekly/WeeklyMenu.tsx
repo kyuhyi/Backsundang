@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, UtensilsCrossed } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { SectionGlow } from "@/components/common/SectionGlow";
 import { Reveal } from "@/components/common/Reveal";
 import type { WeeklyDay } from "./types";
 import { cn } from "@/lib/utils";
@@ -35,7 +36,8 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
   if (!days.length) return null;
 
   return (
-    <section id="weekly" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="weekly" className="relative scroll-mt-20 py-24 sm:py-32">
+      <SectionGlow position="left" texture="grid" />
       <div className="container-x">
         <SectionHeading
           eyebrow="Weekly Special · 주간 백반"

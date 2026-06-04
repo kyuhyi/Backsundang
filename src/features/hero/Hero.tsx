@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronDown, Phone, MapPin } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
@@ -34,11 +35,45 @@ export function Hero() {
         aria-hidden="true"
       >
         <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#1c1813_0%,#0e0d0b_55%,#080706_100%)]" />
+        {/* 매장 상차림 일러스트 배경 (은은하게) */}
+        <Image
+          src="/images/hero-bg.svg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-35 mix-blend-luminosity"
+        />
         <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]" />
-        {/* 은은한 한지/격자 텍스처 */}
-        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(var(--color-gold)_1px,transparent_1px),linear-gradient(90deg,var(--color-gold)_1px,transparent_1px)] [background-size:44px_44px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
+        {/* 은은한 격자 텍스처 */}
+        <div className="texture-grid absolute inset-0 opacity-[0.5]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/60" />
       </motion.div>
+
+      {/* 떠다니는 골드 입자 */}
+      <div className="pointer-events-none absolute inset-0 -z-[5]" aria-hidden="true">
+        {[
+          { l: "12%", t: "26%", s: 5, d: 0 },
+          { l: "82%", t: "32%", s: 4, d: 1.2 },
+          { l: "68%", t: "18%", s: 3, d: 0.6 },
+          { l: "24%", t: "62%", s: 4, d: 2 },
+          { l: "88%", t: "70%", s: 3, d: 1.6 },
+          { l: "40%", t: "78%", s: 5, d: 0.4 },
+        ].map((m, i) => (
+          <motion.span
+            key={i}
+            className="absolute rounded-full bg-gold/60 blur-[1px]"
+            style={{ left: m.l, top: m.t, width: m.s, height: m.s }}
+            animate={{ y: [0, -22, 0], opacity: [0.2, 0.8, 0.2] }}
+            transition={{
+              duration: 5 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: m.d,
+            }}
+          />
+        ))}
+      </div>
 
       <motion.div
         style={{ y: contentY, opacity: fade }}

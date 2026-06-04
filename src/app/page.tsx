@@ -5,6 +5,7 @@ import { Menu } from "@/features/menu";
 import { Gallery } from "@/features/gallery";
 import { VrTour } from "@/features/vr";
 import { Location } from "@/features/location";
+import { Marquee } from "@/components/common/Marquee";
 import { getSiteData } from "@/lib/sheets";
 
 export default async function Home() {
@@ -14,11 +15,15 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <Marquee />
       <About />
       <WeeklyMenu days={weekly} />
       <Menu categories={menu} />
       <Gallery />
       <VrTour />
+      <Marquee
+        items={["예약 환영", "단체석 구비", "포장 가능", "병점역 2번 출구"]}
+      />
       <Location />
     </>
   );
