@@ -11,10 +11,10 @@ export const businessHours = [
 ];
 
 export const businessInfo = {
-  owner: "홍길동", // TODO: 실제 대표자명
+  owner: "백승재",
   bizNumber: "000-00-00000", // TODO: 실제 사업자등록번호
-  parking: "건물 뒤편 전용 주차장 10대 (무료)",
-  transport: "수도권 전철 1호선 병점역 2번 출구 도보 5분",
+  parking: "건물 지하 주차장 이용",
+  transport: "수도권 전철 1호선 병점역 2번 출구 도보 3분",
 };
 
 /**
