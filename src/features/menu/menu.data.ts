@@ -1,9 +1,10 @@
 import type { MenuCategory } from "./types";
 
 /**
- * 백선당 메뉴 (샘플 데이터).
- * ▶ 실제 메뉴/가격으로 교체하는 지점 — 이 배열만 수정하면 화면에 반영된다.
- * price 단위: 원
+ * 백선당 메뉴 (샘플 데이터 / 구글시트 폴백).
+ * ▶ 실제 메뉴는 구글시트 "메뉴판" 탭에서 관리합니다(분류 = 탭).
+ *   시트가 연결되면 이 데이터 대신 시트 값이 표시됩니다.
+ * price 단위: 원 (0 또는 미입력 시 가격 미표시)
  */
 export const menuCategories: MenuCategory[] = [
   {
@@ -40,25 +41,35 @@ export const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    id: "danpum",
-    label: "단품 · 식사",
+    id: "dessert",
+    label: "후식",
     items: [
-      { name: "된장찌개", price: 8000, desc: "두부와 애호박이 푸짐한 구수한 한 뚝배기" },
-      { name: "김치찌개", price: 8000, desc: "푹 익은 묵은지와 돼지고기" },
-      { name: "비빔밥", price: 9000, desc: "제철 나물과 고추장, 계란프라이" },
-      { name: "잔치국수", price: 7000, desc: "멸치 육수에 말아낸 따뜻한 한 그릇" },
-      { name: "공기밥 추가", price: 1000 },
+      { name: "식혜", price: 2000, desc: "직접 띄운 시원하고 달큰한 전통 식혜" },
+      { name: "수정과", price: 2000, desc: "곶감과 계피향 가득한 전통 음료" },
+      { name: "제철 과일", price: 4000, desc: "그날그날 신선한 제철 과일 한 접시" },
+      { name: "아이스 아메리카노", price: 2500 },
     ],
   },
   {
-    id: "banchan",
-    label: "반찬 · 추가",
+    id: "event",
+    label: "이벤트",
     items: [
-      { name: "계란말이", price: 6000, desc: "도톰하게 부쳐낸 부드러운 계란말이" },
-      { name: "잡채", price: 9000, desc: "당면과 채소를 볶아낸 정성 가득 잡채" },
-      { name: "도토리묵무침", price: 8000, desc: "새콤달콤 양념의 쫄깃한 묵무침" },
-      { name: "모둠전", price: 12000, desc: "동그랑땡·동태전·호박전 모둠" },
-      { name: "반찬 리필", price: 0, desc: "기본 반찬은 무한 리필됩니다" },
+      {
+        name: "오픈 기념 음료 1잔 무료",
+        price: 0,
+        desc: "방문 고객 전원 · 오픈 기념 한정",
+        signature: true,
+      },
+      {
+        name: "평일 점심 특선",
+        price: 9000,
+        desc: "평일 11:00–14:00 한정 백반 한 상",
+      },
+      {
+        name: "단체 10인 이상 10% 할인",
+        price: 0,
+        desc: "예약 시 적용 · 단체석 구비",
+      },
     ],
   },
 ];

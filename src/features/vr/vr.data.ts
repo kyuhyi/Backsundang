@@ -15,10 +15,10 @@
  *     (의존성 충돌 방지를 위해 기본 구현은 iframe/video 만 사용한다.)
  */
 export const vrTour = {
-  embedUrl: "", // 예: "https://www.youtube.com/embed/XXXXXXXXXXX"
+  embedUrl: "/vr-tour/goo2sson2.html", // 임시 360 투어 (추후 교체 예정)
   videoUrl: "", // 예: "/videos/store-tour.mp4"
   posterImage: "",
   title: "백선당 매장 VR 투어",
   description:
-    "전통과 모던이 어우러진 백선당의 공간을 360°로 둘러보세요. 매장에서 직접 촬영한 투어 영상이 곧 공개됩니다.",
+    "전통과 모던이 어우러진 백선당의 공간을 360°로 둘러보세요. (임시 데모 투어이며 추후 실제 매장 촬영본으로 교체됩니다.)",
 } as const;

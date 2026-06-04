@@ -47,7 +47,7 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
 
         {/* 요일 선택 — 모바일에서 가로 스크롤(컨테이너 폭 내부에서만 스크롤) */}
         <Reveal className="mt-12" direction="none">
-          <div className="w-full max-w-full overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="w-full max-w-full overflow-x-auto pb-2 pt-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex w-max min-w-full justify-start gap-2 sm:justify-center">
               {days.map((d) => {
                 const isActive = d.day === active;
@@ -64,7 +64,7 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
                     )}
                   >
                     {isToday && (
-                      <span className="absolute -top-2 rounded-full bg-gold px-2 py-0.5 text-[0.6rem] font-bold text-ink">
+                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-2 py-0.5 text-[0.6rem] font-bold text-ink shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                         오늘
                       </span>
                     )}

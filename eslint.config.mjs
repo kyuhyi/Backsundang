@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 정적 에셋(외부 360 투어 번들 등)은 검사 제외
+    "public/**",
   ]),
 ]);
 
