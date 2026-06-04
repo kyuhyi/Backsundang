@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronDown, Phone, MapPin } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
@@ -34,23 +33,13 @@ export function Hero() {
         className="absolute inset-0 z-0"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#241a0f_0%,#140f0a_55%,#080706_100%)]" />
-        {/* 매장 상차림 일러스트 배경 */}
-        <Image
-          src="/images/hero-bg.svg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-bottom opacity-90"
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#1c160e_0%,#100c08_55%,#070605_100%)]" />
         {/* 따뜻한 상단 조명 글로우 */}
-        <div className="absolute left-1/2 top-[10%] h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-gold/20 blur-[130px]" />
+        <div className="absolute left-1/2 top-[8%] h-[55vh] w-[85vh] -translate-x-1/2 rounded-full bg-gold/12 blur-[140px]" />
         {/* 은은한 격자 텍스처 */}
-        <div className="texture-grid absolute inset-0 opacity-[0.25]" />
-        {/* 상단~중앙은 짙게(글자 가독), 하단 상차림은 또렷이 노출 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink from-[28%] via-ink/55 via-[62%] to-ink/0" />
-        <div className="absolute inset-0 bg-[radial-gradient(85%_50%_at_50%_42%,rgba(10,9,8,0.6)_0%,transparent_65%)]" />
+        <div className="texture-grid absolute inset-0 opacity-[0.4]" />
+        {/* 하단 비네팅 */}
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink to-transparent" />
       </motion.div>
 
       {/* 떠다니는 골드 입자 */}

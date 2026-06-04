@@ -112,8 +112,13 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-gold/40">
-                      <UtensilsCrossed className="size-12" />
+                    <div className="flex h-full flex-col items-center justify-center gap-3 bg-[radial-gradient(120%_120%_at_50%_0%,#211f1b_0%,#15130f_100%)]">
+                      <span className="inline-flex size-14 items-center justify-center rounded-full border border-gold/25 bg-gold/5 text-gold/70">
+                        <UtensilsCrossed className="size-6" />
+                      </span>
+                      <span className="text-[0.7rem] tracking-[0.3em] text-taupe-dim">
+                        PHOTO COMING SOON
+                      </span>
                     </div>
                   )}
                   {current.soldOut && (

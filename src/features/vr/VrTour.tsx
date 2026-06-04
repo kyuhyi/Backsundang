@@ -51,14 +51,18 @@ export function VrTour() {
                 className="group relative block h-full w-full focus:outline-none"
                 aria-label={hasMedia ? "VR 투어 재생" : "VR 투어 준비 중"}
               >
-                <Image
-                  src={vrTour.posterImage}
-                  alt={vrTour.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 896px"
-                  className="object-cover opacity-70 transition-opacity duration-500 group-hover:opacity-85"
-                />
-                <div className="absolute inset-0 bg-ink/50" />
+                {vrTour.posterImage ? (
+                  <Image
+                    src={vrTour.posterImage}
+                    alt={vrTour.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 896px"
+                    className="object-cover opacity-70 transition-opacity duration-500 group-hover:opacity-85"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#1c160e_0%,#0e0d0b_100%)]" />
+                )}
+                <div className="absolute inset-0 bg-ink/40" />
 
                 {/* 회전하는 골드 링 + 중앙 아이콘 */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">

@@ -2,17 +2,11 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Plus } from "lucide-react";
+import { Camera } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { SectionGlow } from "@/components/common/SectionGlow";
 import { staggerItem } from "@/components/common/Reveal";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { galleryImages } from "./gallery.data";
+import { galleryItems } from "./gallery.data";
 import { cn } from "@/lib/utils";
 
 export function Gallery() {
@@ -23,7 +17,7 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Gallery"
           title="백선당의 순간들"
-          description="정성껏 차린 음식과 따뜻한 공간을 사진으로 만나보세요. 이미지를 누르면 크게 볼 수 있습니다."
+          description="정성껏 차린 음식과 따뜻한 공간을 곧 사진으로 만나보세요."
         />
 
         <motion.div
@@ -33,49 +27,39 @@ export function Gallery() {
           variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           className="mt-14 grid auto-rows-[200px] grid-cols-2 gap-4 sm:auto-rows-[240px] lg:grid-cols-3"
         >
-          {galleryImages.map((img, i) => (
-            <Dialog key={i}>
-              <DialogTrigger asChild>
-                <motion.button
-                  variants={staggerItem}
-                  className={cn(
-                    "gold-glow group relative overflow-hidden rounded-xl border border-gold/15 transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
-                    img.tall && "row-span-2"
-                  )}
-                  aria-label={`${img.alt} 크게 보기`}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
-                  <span className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-gold/40 bg-ink/50 text-gold opacity-0 backdrop-blur transition-all duration-300 group-hover:opacity-100">
-                    <Plus className="size-4" />
+          {galleryItems.map((item, i) => (
+            <motion.figure
+              key={i}
+              variants={staggerItem}
+              className={cn(
+                "gold-glow group relative overflow-hidden rounded-xl border border-gold/15 bg-charcoal/50 transition-shadow duration-300",
+                item.tall && "row-span-2"
+              )}
+            >
+              {item.src ? (
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              ) : (
+                /* 사진 준비 중 — 깔끔한 플레이스홀더 */
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[radial-gradient(120%_120%_at_50%_0%,#211f1b_0%,#15130f_100%)]">
+                  <span className="inline-flex size-12 items-center justify-center rounded-full border border-gold/25 bg-gold/5 text-gold/70 transition-transform duration-300 group-hover:scale-110">
+                    <Camera className="size-5" />
                   </span>
-                  <span className="absolute bottom-4 left-4 font-display text-sm text-cream drop-shadow">
-                    {img.alt}
+                  <span className="text-[0.7rem] tracking-[0.3em] text-taupe-dim">
+                    PHOTO COMING SOON
                   </span>
-                </motion.button>
-              </DialogTrigger>
-              <DialogContent className="max-w-2xl">
-                <DialogTitle className="sr-only">{img.alt}</DialogTitle>
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 768px"
-                    className="object-cover"
-                  />
                 </div>
-                <p className="py-3 text-center font-display text-sm text-taupe">
-                  {img.alt}
-                </p>
-              </DialogContent>
-            </Dialog>
+              )}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+              <figcaption className="absolute bottom-4 left-4 right-4 font-display text-sm text-cream/90 drop-shadow">
+                {item.label}
+              </figcaption>
+            </motion.figure>
           ))}
         </motion.div>
       </div>

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs><radialGradient id="g" cx="50%" cy="20%" r="90%"><stop offset="0%" stop-color="#1c1813"/><stop offset="100%" stop-color="#0e0d0b"/></radialGradient></defs>
-  <rect width="1200" height="630" fill="url(#g)"/>
-  <text x="600" y="300" text-anchor="middle" font-family="serif" font-size="92" fill="#c9a24b" letter-spacing="14" font-weight="bold">백선당</text>
-  <text x="600" y="370" text-anchor="middle" font-family="serif" font-size="30" fill="#b8ae9c" letter-spacing="20">白 善 堂</text>
-  <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#f5efe2" letter-spacing="6">병점역, 정성으로 차린 백반 한 상</text>
-</svg>
