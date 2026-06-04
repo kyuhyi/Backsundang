@@ -34,6 +34,9 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-ink);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip; /* 모바일 스크롤 컨테이너(html)에서 가로 오버플로 차단 */
 }
 
 body {

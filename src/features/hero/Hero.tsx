@@ -94,7 +94,7 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease, delay: 0.1 }}
         >
-          <Logo className="scale-[1.8] sm:scale-[2.3]" />
+          <Logo className="scale-[1.3] sm:scale-[2]" />
         </motion.div>
 
         <motion.div

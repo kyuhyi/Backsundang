@@ -45,10 +45,10 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
           description="월요일부터 금요일까지, 매일 바뀌는 정성 가득한 오늘의 백반을 만나보세요."
         />
 
-        {/* 요일 선택 — 모바일에서 가로 스크롤 */}
+        {/* 요일 선택 — 모바일에서 가로 스크롤(컨테이너 폭 내부에서만 스크롤) */}
         <Reveal className="mt-12" direction="none">
-          <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="mx-auto flex w-max gap-2 sm:w-full sm:justify-center">
+          <div className="w-full max-w-full overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex w-max min-w-full justify-start gap-2 sm:justify-center">
               {days.map((d) => {
                 const isActive = d.day === active;
                 const isToday = d.day === todayKey;
@@ -57,7 +57,7 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
                     key={d.day}
                     onClick={() => setActive(d.day)}
                     className={cn(
-                      "relative flex min-w-[64px] flex-col items-center rounded-2xl border px-5 py-3 transition-all duration-300",
+                      "relative flex min-w-[60px] shrink-0 flex-col items-center rounded-2xl border px-4 py-3 transition-all duration-300 sm:min-w-[64px] sm:px-5",
                       isActive
                         ? "border-gold/60 bg-gold/15"
                         : "border-gold/15 bg-charcoal/40 hover:border-gold/35"
