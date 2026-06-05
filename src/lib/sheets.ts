@@ -27,11 +27,11 @@ const DEFAULT_SHEETS_API_URL =
  *
  * - 기본적으로 위 DEFAULT_SHEETS_API_URL 에서 가져오며,
  *   환경변수 `SHEETS_API_URL` 가 있으면 그 값이 우선한다.
- * - 60초(revalidate) 간격으로 재검증하므로, 관리자가 시트를 수정하면
- *   재배포 없이 약 1분 내에 사이트에 반영된다 (Vercel ISR).
- * - URL 미설정 또는 오류 시 샘플 데이터로 안전하게 폴백한다.
+ * - fresh=false: 60초 ISR 캐시(서버 렌더 초기값용).
+ *   fresh=true: 캐시 없이 항상 최신(클라이언트 /api/site-data 용).
+ * - 4초 타임아웃 + URL 미설정/오류 시 샘플 데이터로 안전하게 폴백한다.
  */
-export async function getSiteData(): Promise<SiteData> {
+export async function getSiteData(fresh = false): Promise<SiteData> {
   const url = process.env.SHEETS_API_URL || DEFAULT_SHEETS_API_URL;
   const fallback: SiteData = {
     weekly: sampleWeeklyMenu,
@@ -42,7 +42,13 @@ export async function getSiteData(): Promise<SiteData> {
   if (!url) return fallback;
 
   try {
-    const res = await fetch(url, { next: { revalidate: 60 } });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    const res = await fetch(url, {
+      signal: controller.signal,
+      ...(fresh ? { cache: "no-store" } : { next: { revalidate: 60 } }),
+    });
+    clearTimeout(timer);
     if (!res.ok) return fallback;
     const raw = (await res.json()) as unknown;
 

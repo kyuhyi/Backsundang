@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays, UtensilsCrossed } from "lucide-react";
+import { CalendarDays, UtensilsCrossed, MoveHorizontal } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { SectionGlow } from "@/components/common/SectionGlow";
 import { Reveal } from "@/components/common/Reveal";
@@ -25,15 +25,32 @@ function formatPrice(price?: number) {
 export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
   const todayKey = JS_DAY_TO_KEY[new Date().getDay()];
 
+  // 서버 초기값(days)로 시작하되, 로드 시 최신 시트값을 다시 받아 즉시 반영
+  const [allDays, setAllDays] = useState<WeeklyDay[]>(days);
+  useEffect(() => {
+    let on = true;
+    fetch("/api/site-data")
+      .then((r) => r.json())
+      .then((d) => {
+        if (on && Array.isArray(d?.weekly) && d.weekly.length) setAllDays(d.weekly);
+      })
+      .catch(() => {});
+    return () => {
+      on = false;
+    };
+  }, []);
+
   const initial = useMemo(() => {
-    if (todayKey && days.some((d) => d.day === todayKey)) return todayKey;
-    return days[0]?.day;
-  }, [days, todayKey]);
+    if (todayKey && allDays.some((d) => d.day === todayKey)) return todayKey;
+    return allDays[0]?.day;
+  }, [allDays, todayKey]);
 
   const [active, setActive] = useState<WeeklyDay["day"] | undefined>(initial);
-  const current = days.find((d) => d.day === active) ?? days[0];
+  // 데이터가 갱신됐는데 선택 요일이 없으면 보정
+  const current =
+    allDays.find((d) => d.day === active) ?? allDays.find((d) => d.day === initial) ?? allDays[0];
 
-  if (!days.length) return null;
+  if (!allDays.length) return null;
 
   return (
     <section id="weekly" className="relative scroll-mt-20 py-24 sm:py-32">
@@ -54,7 +71,7 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
         <Reveal className="mt-12" direction="none">
           <div className="w-full max-w-full overflow-x-auto pb-2 pt-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex w-max min-w-full justify-start gap-2 sm:justify-center">
-              {days.map((d) => {
+              {allDays.map((d) => {
                 const isActive = d.day === active;
                 const isToday = d.day === todayKey;
                 return (
@@ -90,6 +107,11 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
                 );
               })}
             </div>
+          </div>
+          {/* 모바일 좌우 스크롤 안내 */}
+          <div className="mt-3 flex items-center justify-center gap-1.5 text-[0.7rem] tracking-wide text-taupe-dim sm:hidden">
+            <MoveHorizontal className="size-3.5 text-gold/70" />
+            좌우로 넘겨 요일을 확인하세요
           </div>
         </Reveal>
 

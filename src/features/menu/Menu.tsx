@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -45,9 +46,23 @@ function MenuRow({ item }: { item: MenuItem }) {
 }
 
 export function Menu({ categories }: { categories?: MenuCategory[] }) {
-  // 구글시트 데이터가 있으면 사용, 없으면 샘플 폴백
-  const menuCategories =
-    categories && categories.length ? categories : fallbackCategories;
+  // 서버 초기값으로 시작하고, 로드 시 최신 시트값을 다시 받아 즉시 반영
+  const [cats, setCats] = useState<MenuCategory[]>(
+    categories && categories.length ? categories : fallbackCategories
+  );
+  useEffect(() => {
+    let on = true;
+    fetch("/api/site-data")
+      .then((r) => r.json())
+      .then((d) => {
+        if (on && Array.isArray(d?.menu) && d.menu.length) setCats(d.menu);
+      })
+      .catch(() => {});
+    return () => {
+      on = false;
+    };
+  }, []);
+  const menuCategories = cats.length ? cats : fallbackCategories;
 
   return (
     <section
@@ -62,7 +77,11 @@ export function Menu({ categories }: { categories?: MenuCategory[] }) {
         />
 
         <div className="mt-14 flex flex-col items-center">
-          <Tabs defaultValue={menuCategories[0].id} className="w-full">
+          <Tabs
+            key={menuCategories.map((c) => c.id).join("|")}
+            defaultValue={menuCategories[0].id}
+            className="w-full"
+          >
             <div className="flex justify-center">
               <TabsList>
                 {menuCategories.map((cat) => (
