@@ -113,6 +113,24 @@ function toBool(v: unknown): boolean {
   return false;
 }
 
+/**
+ * 구글 드라이브 이미지 URL을 빠른 이미지 CDN(lh3.googleusercontent.com) 형식으로 변환.
+ * drive.google.com/thumbnail?id=... (느린 썸네일 생성 엔드포인트) →
+ * https://lh3.googleusercontent.com/d/<ID>=w1200 (구글 이미지 CDN, 빠름·핫링크 허용)
+ * 이미 lh3 형식이거나 드라이브가 아니면 그대로 둔다.
+ */
+function toFastImageUrl(url: string): string {
+  if (!url) return "";
+  if (url.includes("googleusercontent.com")) return url;
+  if (!url.includes("drive.google.com")) return url;
+  const m =
+    url.match(/[?&]id=([^&]+)/) ||
+    url.match(/\/file\/d\/([^/]+)/) ||
+    url.match(/\/d\/([^/?]+)/);
+  const id = m && m[1];
+  return id ? `https://lh3.googleusercontent.com/d/${id}=w1200` : url;
+}
+
 const DAY_ALIAS: Record<string, WeeklyDay["day"]> = {
   mon: "mon", 월: "mon", 월요일: "mon",
   tue: "tue", 화: "tue", 화요일: "tue",
@@ -138,7 +156,7 @@ function normalizeWeekly(raw: unknown): WeeklyDay[] {
       date: (r.date ?? r["날짜"]) ? String(r.date ?? r["날짜"]).trim() : undefined,
       title: String(r.title ?? r["대표메뉴"] ?? r["메뉴"] ?? "").trim(),
       imageUrl: (r.imageUrl ?? r["이미지"] ?? r["이미지URL"])
-        ? String(r.imageUrl ?? r["이미지"] ?? r["이미지URL"]).trim()
+        ? toFastImageUrl(String(r.imageUrl ?? r["이미지"] ?? r["이미지URL"]).trim())
         : undefined,
       items: toItems(r.items ?? r["반찬"] ?? r["구성"]),
       price: toNumber(r.price ?? r["가격"]),
