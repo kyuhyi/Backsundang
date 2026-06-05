@@ -6,19 +6,21 @@ import { Gallery } from "@/features/gallery";
 import { VrTour } from "@/features/vr";
 import { Location } from "@/features/location";
 import { Marquee } from "@/components/common/Marquee";
-import { getSiteData } from "@/lib/sheets";
+import { sampleWeeklyMenu } from "@/features/weekly/weekly.data";
+import { menuCategories } from "@/features/menu/menu.data";
 
-export default async function Home() {
-  // 구글시트(Apps Script) 연동 데이터 — 미설정 시 샘플로 폴백
-  const { weekly, menu } = await getSiteData();
-
+// 홈페이지는 순수 정적(HTML)으로 서빙한다.
+// 시트(주간메뉴/메뉴) 최신값은 WeeklyMenu/Menu가 클라이언트에서
+// /api/site-data 로 즉시 받아 갱신하므로 서버 fetch가 필요 없다.
+// → ISR 프리렌더 캐시 경로를 피해 일부 인앱브라우저의 원시 텍스트 노출을 방지.
+export default function Home() {
   return (
     <>
       <Hero />
       <Marquee />
       <About />
-      <WeeklyMenu days={weekly} />
-      <Menu categories={menu} />
+      <WeeklyMenu days={sampleWeeklyMenu} />
+      <Menu categories={menuCategories} />
       <Gallery />
       <VrTour />
       <Marquee
