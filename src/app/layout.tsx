@@ -87,6 +87,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    // 구글은 public/googlebec0a8865e04a094.html 파일로 인증.
+    // 네이버는 파일 + 메타태그 이중 적용.
+    other: {
+      "naver-site-verification": "1bb2e5d4b6823760790877b6e3ffc831",
+    },
+  },
 };
 
 export default function RootLayout({
