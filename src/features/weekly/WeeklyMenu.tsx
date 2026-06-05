@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, UtensilsCrossed, MoveHorizontal } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -20,6 +21,11 @@ const JS_DAY_TO_KEY: Record<number, WeeklyDay["day"] | undefined> = {
 function formatPrice(price?: number) {
   if (!price) return null;
   return `${price.toLocaleString("ko-KR")}원`;
+}
+
+// next/image remotePatterns 에 등록된 호스트만 최적화 대상
+function isOptimizable(url: string) {
+  return /(?:drive\.google\.com|googleusercontent\.com)/.test(url);
 }
 
 export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
@@ -130,14 +136,25 @@ export function WeeklyMenu({ days }: { days: WeeklyDay[] }) {
                 {/* 이미지 */}
                 <div className="relative aspect-[4/3] w-full bg-ink md:aspect-auto md:min-h-[340px]">
                   {current.imageUrl ? (
-                    // 관리자가 시트에 넣은 임의 URL을 쓰므로 일반 img 사용
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={current.imageUrl}
-                      alt={current.title}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
+                    isOptimizable(current.imageUrl) ? (
+                      // 드라이브/구글 이미지 → next/image로 최적화·캐시(빠름)
+                      <Image
+                        src={current.imageUrl}
+                        alt={current.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    ) : (
+                      // 그 외 임의 호스트는 일반 img로 안전 처리
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={current.imageUrl}
+                        alt={current.title}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    )
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center gap-3 bg-[radial-gradient(120%_120%_at_50%_0%,#211f1b_0%,#15130f_100%)]">
                       <span className="inline-flex size-14 items-center justify-center rounded-full border border-gold/25 bg-gold/5 text-gold/70">

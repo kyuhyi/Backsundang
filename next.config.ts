@@ -2,11 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // 갤러리/VR 포스터에 신뢰된 자체 SVG 플레이스홀더를 사용하므로 허용.
-    // 실제 사진(jpg/webp 등)으로 교체하면 이 옵션 없이도 정상 동작한다.
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // 구글시트(드라이브) 이미지 URL을 next/image로 최적화·CDN 캐시 → 빠르게 로드
+    remotePatterns: [
+      { protocol: "https", hostname: "drive.google.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "**.googleusercontent.com" },
+    ],
   },
 };
 
