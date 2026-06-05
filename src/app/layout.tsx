@@ -1,43 +1,19 @@
 import type { Metadata } from "next";
-import {
-  Nanum_Myeongjo,
-  Noto_Sans_KR,
-  Gowun_Batang,
-  Song_Myung,
-} from "next/font/google";
+import { Nanum_Myeongjo } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-// 브랜드 워드마크용 — 전통 붓끝 감성의 명조 (한국풍 포인트)
-const songmyung = Song_Myung({
-  variable: "--font-songmyung",
-  weight: ["400"],
-  display: "swap",
-});
-
-// 제목용 — 전통 명조 감성
+// 한글 웹폰트는 서브셋 파일이 수십 개라 초기 로딩이 무겁다.
+// → 본문/보조는 시스템 한글 폰트(다운로드 0)를 쓰고,
+//   제목/브랜드만 명조 웹폰트 1종을 preload 끄고(즉시 표시 후 교체) 사용한다.
 const myeongjo = Nanum_Myeongjo({
   variable: "--font-myeongjo",
   subsets: ["latin"],
-  weight: ["400", "700", "800"],
+  weight: ["400", "800"],
   display: "swap",
-});
-
-// 본문용 — 가독성 산세리프
-const noto = Noto_Sans_KR({
-  variable: "--font-noto",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  display: "swap",
-});
-
-// 보조 — 부드러운 바탕체
-const batang = Gowun_Batang({
-  variable: "--font-batang",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
+  preload: false,
+  fallback: ["AppleMyungjo", "Batang", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -104,9 +80,13 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${songmyung.variable} ${myeongjo.variable} ${noto.variable} ${batang.variable} h-full antialiased`}
+      style={{ backgroundColor: "#0e0d0b" }}
+      className={`${myeongjo.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-ink text-cream">
+      <body
+        style={{ backgroundColor: "#0e0d0b" }}
+        className="min-h-full flex flex-col bg-ink text-cream"
+      >
         <Navbar />
         <main className="w-full flex-1 overflow-x-clip">{children}</main>
         <Footer />

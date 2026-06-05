@@ -17,10 +17,12 @@
   --color-taupe: #b8ae9c;
   --color-taupe-dim: #8a8170;
 
-  --font-brand: var(--font-songmyung);
+  --font-brand: var(--font-myeongjo);
   --font-display: var(--font-myeongjo);
-  --font-sans: var(--font-noto);
-  --font-serif: var(--font-batang);
+  /* 본문·보조는 시스템 한글 폰트(다운로드 없음) */
+  --font-sans: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR",
+    system-ui, sans-serif;
+  --font-serif: var(--font-myeongjo), AppleMyungjo, Batang, serif;
 }
 
 :root {

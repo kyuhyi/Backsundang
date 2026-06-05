@@ -60,27 +60,49 @@ export function Hero() {
     ctx.drawImage(img, dx, dy, dw, dh);
   };
 
-  // 프레임 프리로드
+  // 프레임 프리로드 — 초기 로드/페인트를 막지 않도록 idle 시점으로 미룬다.
+  // (히어로 배경은 CSS로 첫 프레임을 즉시 보여주므로 지연돼도 빈 화면이 없다.)
   useEffect(() => {
     let cancelled = false;
     let count = 0;
     const imgs: HTMLImageElement[] = [];
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new window.Image();
-      img.src = framePath(i);
-      const done = () => {
-        if (cancelled) return;
-        count += 1;
-        setLoaded(count);
-        if (i === 0) draw(progressToIndex(scrollYProgress.get()));
-      };
-      img.onload = done;
-      img.onerror = done;
-      imgs.push(img);
-    }
-    imagesRef.current = imgs;
+
+    const startPreload = () => {
+      if (cancelled) return;
+      for (let i = 0; i < FRAME_COUNT; i++) {
+        const img = new window.Image();
+        img.src = framePath(i);
+        const done = () => {
+          if (cancelled) return;
+          count += 1;
+          setLoaded(count);
+          if (i === 0) draw(progressToIndex(scrollYProgress.get()));
+        };
+        img.onload = done;
+        img.onerror = done;
+        imgs.push(img);
+      }
+      imagesRef.current = imgs;
+    };
+
+    // 페이지가 한가해진 뒤(또는 load 직후) 프레임을 받기 시작
+    type RIC = (cb: () => void, opts?: { timeout: number }) => number;
+    const ric: RIC =
+      (window as unknown as { requestIdleCallback?: RIC }).requestIdleCallback ??
+      ((cb) => window.setTimeout(cb, 400) as unknown as number);
+    const start = () => ric(startPreload, { timeout: 1500 });
+    let kicked = false;
+    const kick = () => {
+      if (kicked) return;
+      kicked = true;
+      start();
+    };
+    if (document.readyState === "complete") kick();
+    else window.addEventListener("load", kick, { once: true });
+
     return () => {
       cancelled = true;
+      window.removeEventListener("load", kick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
