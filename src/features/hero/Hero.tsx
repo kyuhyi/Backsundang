@@ -115,7 +115,10 @@ export function Hero() {
     // 높이를 길게 잡아 고정(sticky) 상태에서 스크롤로 장면을 스크럽한다.
     // 420vh: 약 320vh 스크럽 + 100vh 뷰포트. SCRUB_END 이후 구간은 마지막 장면 홀드.
     <section ref={outerRef} id="top" className="relative h-[420vh]">
-      <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-ink">
+      <div
+        className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-ink bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/hero-frames/frame-001.jpg')" }}
+      >
         {/* 스크롤 스크럽 영상(캔버스) */}
         <canvas
           ref={canvasRef}
@@ -123,10 +126,10 @@ export function Hero() {
           aria-hidden="true"
         />
 
-        {/* 가독성 스크림 */}
-        <div className="absolute inset-0 z-0 bg-ink/55" aria-hidden="true" />
+        {/* 가독성 스크림 (살짝 밝게) */}
+        <div className="absolute inset-0 z-0 bg-ink/30" aria-hidden="true" />
         <div
-          className="absolute inset-0 z-0 bg-[radial-gradient(100%_70%_at_50%_45%,rgba(10,9,8,0.55)_0%,rgba(10,9,8,0.2)_60%,rgba(10,9,8,0.75)_100%)]"
+          className="absolute inset-0 z-0 bg-[radial-gradient(100%_70%_at_50%_45%,rgba(10,9,8,0.28)_0%,rgba(10,9,8,0.05)_58%,rgba(10,9,8,0.6)_100%)]"
           aria-hidden="true"
         />
 
